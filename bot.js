@@ -35,21 +35,27 @@ if (!process.env.verify_token) {
   process.exit(1);
 }
 
-if (!process.env.wit) {
+if (!process.env.wit_token) {
   console.log('Error: Specify wit in environment');
   process.exit(1);
 }
 
 
-var Botkit = require('botkit');
-
-
 // Create the Botkit controller, which controls all instances of the bot.
+var Botkit = require('botkit');
 var controller = Botkit.facebookbot({
   stats_optout: true,
   verify_token: process.env.verify_token,
   access_token: process.env.page_token
 });
+
+// Create WitAI instance for message routing
+var wit = require('botkit-witai')({
+  accessToken: process.env.wit_token,
+  // minConfidence: 0.6,
+  logLevel: 'debug'
+});
+
 
 
 // Set up an Express-powered webserver to expose oauth and webhook endpoints
@@ -65,8 +71,17 @@ require(__dirname + '/components/thread_settings.js')(controller);
 require(__dirname + '/components/onboarding.js')(controller);
 
 
+controller.middleware.receive.use(wit.receive);
 
 var normalizedPath = require("path").join(__dirname, "skills");
 require("fs").readdirSync(normalizedPath).forEach(function(file) {
-  require("./skills/" + file)(controller);
+  require("./skills/" + file)(controller, wit);
 });
+
+
+
+// controller.hears(['gigs'], 'message_received', wit.hears, function (bot, message) {
+//   console.log("Wit.ai detected entities", message.entities);
+//   bot.startTyping(message);
+//   bot.reply(message, 'wits alive');
+// });
