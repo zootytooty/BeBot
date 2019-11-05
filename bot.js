@@ -71,17 +71,44 @@ require(__dirname + '/components/thread_settings.js')(controller);
 require(__dirname + '/components/onboarding.js')(controller);
 
 
-controller.middleware.receive.use(wit.receive);
+// Tell botkit to route messages via Wit.AI prior to reponding
+controller.middleware.receive.use(wit.receive)
 
-var normalizedPath = require("path").join(__dirname, "skills");
-require("fs").readdirSync(normalizedPath).forEach(function(file) {
-  require("./skills/" + file)(controller, wit);
-});
-
-
-
-// controller.hears(['gigs'], 'message_received', wit.hears, function (bot, message) {
-//   console.log("Wit.ai detected entities", message.entities);
-//   bot.startTyping(message);
-//   bot.reply(message, 'wits alive');
+// var normalizedPath = require("path").join(__dirname, "skills");
+//   require("fs").readdirSync(normalizedPath).forEach(function(file) {
+//   require("./skills/" + file)(controller, wit);
 // });
+
+
+// Main entry to return list of current gigs
+const moment = require('moment');
+let gigs = require('./service/get_gigs')
+controller.hears(['events'], 'message_received', wit.hears, function (bot, message) {
+  
+  // Extract Date
+  var date = moment().format('YYYYMMDD')
+  if(message.entities.hasOwnProperty('datetime')){
+    var date = moment(message.entities['datetime'][0]['value']).format('YYYYMMDD');
+  };
+
+  // Extract Venue
+  var venue = null;
+  if(message.entities.hasOwnProperty('venue')){
+    var venue = message.entities['venue'][0]['value'];
+    
+    console.log('Selected venue is: ' + venue);
+  };
+
+  // Get list of application gigs
+  gigs.get_gigs(date, venue, function(err, showList) {
+      
+      if(!err){
+          bot.startTyping(message);
+          bot.reply(message, showList);
+      } else {
+          console.log(err)
+          bot.reply(message, "Oh no something went wrong :'( ");
+      }
+  })
+
+});
