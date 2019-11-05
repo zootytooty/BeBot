@@ -1,20 +1,28 @@
-const moment = require('moment');
 const request = require('request');
 
 module.exports = {
-	get_gigs: function(gig_date, callback){
+	get_gigs: function(gig_date, venue = null, callback){
+
+		if(venue=='all' || venue == null || venue == ''){
+			var query_string = {
+				performance_date: gig_date
+			}
+		} else {
+			var query_string = {
+				performance_date: gig_date,
+				venue: venue
+			}
+		}		
 
 		// Build out request options
 		let options = {  
 			url: 'https://4xo55t0ma9.execute-api.ap-southeast-2.amazonaws.com/dev/gigmanagement/getgigs',
 			json: true,
-			qs:{
-				performance_date: gig_date
-			}
+			qs: query_string
 		};
 
 		request.get(options, function(err, res, body){
-			if (!err && res.statusCode === 200) {
+			if (!err && res.statusCode === 200 && body.length != 0) {
 
 				var ArrShowInfo = [];
 				for(var i = 0, len = body.length; i < len; i++){
@@ -22,6 +30,8 @@ module.exports = {
 				};
 
 					return callback(null, ArrShowInfo.join("\r\n"));
+			} else {
+				return callback(null, "Sorry, there's no music");
 			};
 		});
 	}
