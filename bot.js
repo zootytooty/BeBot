@@ -84,18 +84,30 @@ controller.middleware.receive.use(wit.receive)
 const moment = require('moment');
 let gigs = require('./service/get_gigs')
 controller.hears(['events'], 'message_received', wit.hears, function (bot, message) {
-  
+
   // Extract Date
   var date = moment().format('YYYYMMDD')
-  if(message.entities.hasOwnProperty('datetime')){
-    var date = moment(message.entities['datetime'][0]['value']).format('YYYYMMDD');
+  if (message.entities.hasOwnProperty('datetime')) {
+    // Extract returned Wit Date(time)
+    wit_date = message.entities['datetime'][0]
+
+    if (wit_date.hasOwnProperty('from')) {
+      // If Wit returns a date AND time the response object looks different
+      var date = moment(wit_date['from']['value']).format('YYYYMMDD')
+  
+    } else {
+      // If Wit only returns a date, eg for today, tomorrow, next week etc
+      var date = moment(wit_date['value']).format('YYYYMMDD');
+    };
   };
+
+
 
   // Extract Venue
   var venue = null;
   if(message.entities.hasOwnProperty('venue')){
     var venue = message.entities['venue'][0]['value'];
-    
+
     console.log('Selected venue is: ' + venue);
   };
 
