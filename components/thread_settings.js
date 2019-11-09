@@ -24,21 +24,14 @@ module.exports = function(controller) {
                 },
                 {
                   "type":"nested",
-                  "title":"Botkit Docs",
+                  "title":"Zoot Helpers",
                   "call_to_actions": [
                       {
                         type: "web_url",
-                        "title": "Facebook Docs",
-                        "url":"https://github.com/howdyai/botkit/blob/master/docs/readme-facebook.md",
+                        "title": "Project Home",
+                        "url":"https://github.com/zootytooty",
                         "webview_height_ratio":"full",
-                      },
-                      {
-                        type: "web_url",
-                        "title": "Main Readme",
-                        "url":"https://github.com/howdyai/botkit/blob/master/readme.md",
-                        "webview_height_ratio":"full",
-                      }                    
-
+                      }                
                   ]
                 }
             ]
