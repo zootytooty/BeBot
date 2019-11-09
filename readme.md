@@ -57,6 +57,29 @@ npm install
 node bot.js
 ```
 
+### 2. Start BeBot - Dockerised
+
+1. Install Docker
+
+2. Build the Docker image
+```bash
+docker build -t zooty/bebot .
+```
+
+3. Spin up a container using the image
+```bash
+docker run -d -p 3000:3000 zooty/bebot
+```
+You can stop the running container by checking the container ID, then stopping it.
+```bash
+docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
+ec7cc365f7e9        zooty/bebot         "docker-entrypoint.s…"   29 minutes ago      Up 29 minutes       0.0.0.0:3000->3000/tcp   affectionate_maxwell
+
+docker kill ec7cc
+```
+
+
 
 ### 3. Configure Facebook
 
