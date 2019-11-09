@@ -18,5 +18,5 @@ COPY .env /usr/src/app
 
 #set startup commands
 
-
+EXPOSE 3000
 CMD ["node", "bot"]
