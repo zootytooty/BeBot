@@ -4,7 +4,8 @@
   "description": "A starter kit for building a custom Facebook Messenger bot with Botkit",
   "main": "bot.js",
   "scripts": {
-    "start": "node bot.js"
+    "start": "node bot.js",
+    "dev": "nodemon bot.js"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
@@ -17,7 +18,9 @@
     "request": "^2.79.0",
     "wordfilter": "^0.2.6"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/howdyai/botkit-starter-facebook.git"
