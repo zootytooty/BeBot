@@ -52,9 +52,14 @@ export verify_token={verify token}
 npm install
 ```
 
-4. Start the bot    
+4. Start BeBot for development. nodemon will watch for changes to files and re-start BeBot for you.
 ```bash
-node bot.js
+npm run dev
+```
+
+5. Or to start BeBot regularly.
+```bash
+npm run start
 ```
 
 ### 2. Start BeBot - Dockerised
