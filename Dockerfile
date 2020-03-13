@@ -9,7 +9,7 @@ RUN npm install botkit --save
 COPY bot.js /usr/src/app
 COPY package.json /usr/src/app
 COPY package-lock.json /usr/src/app
-RUN npm install
+RUN npm install --production
 
 COPY components/ /usr/src/app/components
 COPY skills/ /usr/src/app/skills
