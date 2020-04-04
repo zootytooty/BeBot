@@ -1,22 +1,20 @@
 FROM node:alpine
 
 # create app directory 
-RUN mkdir -p /usr/src/app 
-WORKDIR /usr/src/app 
+RUN mkdir -p /usr/bebot 
+WORKDIR /usr/bebot 
 
-#install botkit 
-RUN npm install botkit --save 
-COPY bot.js /usr/src/app
-COPY package.json /usr/src/app
-COPY package-lock.json /usr/src/app
+# install dependencies
+COPY package.json /usr/bebot 
+COPY package-lock.json /usr/bebot 
 RUN npm install --production
 
-COPY components/ /usr/src/app/components
-COPY skills/ /usr/src/app/skills
-COPY service/ /usr/src/app/service
-COPY .env /usr/src/app
+# copy src
+COPY src/ /usr/bebot/src
+
+# add secrets file (there's gotta be a better way)
+COPY .env /usr/bebot
 
 #set startup commands
-
 EXPOSE 3000
-CMD ["node", "bot"]
+CMD ["npm", "run", "start"]
