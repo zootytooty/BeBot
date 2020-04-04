@@ -14,7 +14,8 @@
     "botkit": "^4.6.2",
     "botkit-plugin-cms": "^1.0.3",
     "botkit-witai": "^1.1.0",
-    "dotenv": "^7.0.0"
+    "dotenv": "^7.0.0",
+    "moment": "^2.24.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
