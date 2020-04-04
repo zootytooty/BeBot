@@ -4,7 +4,8 @@
   "description": "",
   "main": "bot.js",
   "scripts": {
-    "start": "node bot.js",
+    "start": "node src/bot.js",
+    "dev": "nodemon src/bot.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -13,5 +14,8 @@
     "botkit": "^4.6.2",
     "botkit-plugin-cms": "^1.0.3",
     "dotenv": "^7.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }
