@@ -41,10 +41,14 @@ In a new terminal:
 cd .../BeBot/
 ```
 
-2. Add the Facebook page & vertify tokens to your environment    
+2. Create a `.env` file so the app can load in required tokens and secrets    
 ```bash
-export page_token={page token}
-export verify_token={verify token}
+FACEBOOK_APPID={appId}
+FACEBOOK_APP_SECRET={appSecret}
+FACEBOOK_ACCESS_TOKEN={accessToken}
+FACEBOOK_VERIFY_TOKEN={verifyToken}
+
+WIT_TOKEN={witToken}
 ```
 
 3. Install dependencies
