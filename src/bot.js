@@ -54,6 +54,14 @@ if (process.env.CMS_URI) {
     }));
 }
 
+// Import wit middleware
+const wit = require('botkit-witai')({
+    accessToken: process.env.WIT_TOKEN,
+    logLevel: 'error'
+})
+
+controller.middleware.receive.use(wit.receive)
+
 // Once the bot has booted up its internal services, you can use them to do stuff.
 controller.ready(() => {
 
