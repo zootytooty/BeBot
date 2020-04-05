@@ -10,10 +10,6 @@ Currently the supported functionality & keywords are supported:
 | | | |
 | | | |
 
-
-
-
-
 ## Running BeBot
 
 Quite a number of steps are required to get BeBot up & running. Simplifying this process & making it repeatable for multiple developers in parallel is something that is absolutely required.
@@ -100,8 +96,8 @@ Next we'll configure our Facebook page to talk to allow messenger conversations 
 1. Navigate to [Developer Facebook](https://developer.facebook.com)
 2. Go to `My Apps` & select your app
 3. Go to `Webhooks` -> `Edit subscription` & enter:    
-    - Callback URL: {ngrok https forwarding url}/facebook/receive
-    - Verify Token: Whatever you like, just take note of it as we'll need it later
+    - Callback URL: `https://{hostname}:3000/api/messages`
+    - Verify Token: The value specified in your `FACEBOOK_VERIFY_TOKEN` environment variable
 4. Go to `Messenger` -> `Settings` & scroll down to `Webhooks` & select the page to subscribe. If required, re-enter the webhook details used in step 3
 
 
