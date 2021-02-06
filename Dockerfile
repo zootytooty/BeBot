@@ -7,7 +7,7 @@ WORKDIR /usr/bebot
 # install dependencies
 COPY package.json /usr/bebot 
 COPY package-lock.json /usr/bebot 
-RUN npm install --production
+RUN npm ci --production
 
 # copy src
 COPY src/ /usr/bebot/src
