@@ -17,7 +17,8 @@
     "botkit": "^4.6.2",
     "botkit-plugin-cms": "^1.0.3",
     "dotenv": "^7.0.0",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "node-wit": "^6.0.0"
   },
   "devDependencies": {
     "eslint": "^7.19.0",
