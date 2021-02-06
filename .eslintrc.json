@@ -1,7 +1,12 @@
 {
-    "extends": ["airbnb", "prettier"],
-    "plugins": ["prettier"],
-    "rules": {
-        "prettier/prettier": "warn"
-    }
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["prettier"],
+  "env": {
+    "node": true
+  },
+  "rules": {
+    "prettier/prettier": "warn",
+    "no-console": 0,
+    "no-param-reassign": [2, { "props": false }]
+  }
 }
