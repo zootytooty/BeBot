@@ -13,8 +13,8 @@ const getGigs = async (query = {}) => {
 
     // summarise each gig in the response
     const gigs = response.data.map(
-      (gig) =>
-        `${gig.venue}: ${gig.title}, ${!gig.price ? 'Free' : `$${gig.price}`}`
+      ({ venue, title, price }) =>
+        `${venue}: ${title}, ${!price ? 'Free' : `$${price}`}`
     );
 
     return gigs.join('\r\n');
