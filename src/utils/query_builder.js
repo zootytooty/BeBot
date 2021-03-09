@@ -1,34 +1,44 @@
 // Extracts entities from a wit enriched message and parses them into an object
 // to be used as query strings when listing gigs
 
-const moment = require('moment')
+const moment = require('moment');
 
 const getVenue = (message) => {
-    if (!message.entities['venue']) {
-        return
-    }
-    return message.entities['venue'][0]['value']
-}
+  const { traits } = message;
+
+  if (!traits || !traits.venue) {
+    return null;
+  }
+  return message.traits.venue[0].value;
+};
 
 const getDate = (message) => {
-    const datetime = message.entities['datetime']
+  const now = moment().format('YYYYMMDD');
 
-    if (!datetime) {
-        return moment().format('YYYYMMDD')
-    }
+  const { entities } = message;
 
-    if (message.entities['datetime'][0]['from']) {
-        return moment(message.entities['datetime'][0]['from']['value']).format('YYYYMMDD')
-    }
-    
-    return message.entities['datetime'][0]['value']
-}
+  if (!entities) {
+    return now;
+  }
+
+  const { 'wit$datetime:datetime': datetime } = entities;
+
+  if (!datetime) {
+    return now;
+  }
+
+  if (datetime[0].from) {
+    return moment(datetime[0].from.value).format('YYYYMMDD');
+  }
+
+  return datetime[0].value;
+};
 
 const queryBuilder = (message) => {
-    const venue = getVenue(message)
-    const performance_date = getDate(message)
+  const venue = getVenue(message);
+  const performanceDate = getDate(message);
 
-    return { venue, performance_date }
-}
+  return { venue, performance_date: performanceDate };
+};
 
-module.exports = queryBuilder
+module.exports = queryBuilder;

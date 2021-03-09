@@ -49,7 +49,7 @@ WIT_TOKEN={witToken}
 
 3. Install dependencies
 ```bash
-npm install
+npm ci
 ```
 
 4. Start BeBot for development. nodemon will watch for changes to files and re-start BeBot for you.
