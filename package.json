@@ -13,17 +13,18 @@
   "dependencies": {
     "axios": "^0.21.1",
     "botbuilder-adapter-facebook": "^1.0.9",
-    "botbuilder-storage-mongodb": "^0.9.5",
+    "botbuilder-storage-mongodb": "^1.0.8",
     "botkit": "^4.6.2",
     "botkit-plugin-cms": "^1.0.3",
-    "dotenv": "^7.0.0",
+    "dotenv": "^8.2.0",
     "moment": "^2.24.0",
-    "node-wit": "^6.0.0"
+    "node-wit": "^6.0.0",
+    "node-wt": "^1.0.0"
   },
   "devDependencies": {
     "eslint": "^7.19.0",
     "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-prettier": "^7.2.0",
+    "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.3.1",
