@@ -1,7 +1,7 @@
 {
   "name": "botkit-zoot",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "The zoot! Jazzy chatbot returning all the hip swingin' gigs in ol' Melbourne town",
   "main": "bot.js",
   "scripts": {
     "start": "node src/bot.js",
