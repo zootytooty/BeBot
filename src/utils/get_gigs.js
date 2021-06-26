@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 const GIGS_API =
-  'https://4xo55t0ma9.execute-api.ap-southeast-2.amazonaws.com/dev/gigmanagement/getgigs';
+  'https://v3dl6mmgz1.execute-api.ap-southeast-2.amazonaws.com/dev/gigs';
 
 const getGigs = async (query = {}) => {
   try {
