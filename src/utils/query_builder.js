@@ -31,7 +31,7 @@ const getDate = (message) => {
     return moment(datetime[0].from.value).format('YYYY-MM-DD');
   }
 
-  return datetime[0].value;
+  return moment(datetime[0].value).format('YYYY-MM-DD');
 };
 
 const queryBuilder = (message) => {
