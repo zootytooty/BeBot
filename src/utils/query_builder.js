@@ -13,7 +13,7 @@ const getVenue = (message) => {
 };
 
 const getDate = (message) => {
-  const now = moment().format('YYYYMMDD');
+  const now = moment().format('YYYY-MM-DD');
 
   const { entities } = message;
 
@@ -28,10 +28,10 @@ const getDate = (message) => {
   }
 
   if (datetime[0].from) {
-    return moment(datetime[0].from.value).format('YYYYMMDD');
+    return moment(datetime[0].from.value).format('YYYY-MM-DD');
   }
 
-  return datetime[0].value;
+  return moment(datetime[0].value).format('YYYY-MM-DD');
 };
 
 const queryBuilder = (message) => {

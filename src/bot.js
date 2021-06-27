@@ -27,7 +27,7 @@ const {
   FacebookEventTypeMiddleware,
 } = require('botbuilder-adapter-facebook');
 
-const { MongoDbStorage } = require('botbuilder-storage-mongodb');
+// const { MongoDbStorage } = require('botbuilder-storage-mongodb');
 
 // Load process.env values from .env file
 require('dotenv').config();
@@ -37,17 +37,14 @@ const wit = require('./middleware/wit-ai')({
   accessToken: process.env.WIT_TOKEN,
 });
 
-let storage = null;
-if (process.env.MONGO_URI) {
-  storage = new MongoDbStorage({
-    url: process.env.MONGO_URI,
-  });
-}
+const storage = null;
+// if (process.env.MONGO_URI) {
+//   storage = new MongoDbStorage({
+//     url: process.env.MONGO_URI,
+//   });
+// }
 
 const adapter = new FacebookAdapter({
-  // REMOVE THIS OPTION AFTER YOU HAVE CONFIGURED YOUR APP!
-  enable_incomplete: true,
-
   verify_token: process.env.FACEBOOK_VERIFY_TOKEN,
   access_token: process.env.FACEBOOK_ACCESS_TOKEN,
   app_secret: process.env.FACEBOOK_APP_SECRET,
@@ -96,5 +93,5 @@ controller.ready(() => {
 });
 
 controller.webserver.get('/', (req, res) =>
-  res.send(`This app is running Botkit ${controller.version}.`)
+  res.send(`Beep bop boop, this is Zoot`)
 );
