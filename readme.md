@@ -14,6 +14,13 @@ Currently the supported functionality & keywords are supported:
 
 Quite a number of steps are required to get BeBot up & running. Simplifying this process & making it repeatable for multiple developers in parallel is something that is absolutely required.
 
+### 0. Deployment
+BeBot is deployed to Heroku, which simply starts the app (`npm start`). Collect the hosted domain from:
+1. Enter app (`zoot-bot` in this case)
+2. Settings
+3. Domain, eg `https://what-a-great-app.herokuapp.com`
+
+Local hosting might be desirable though for development purposes:
 
 ### 1. Setup NGROK
 
@@ -34,7 +41,7 @@ In a new terminal:
 
 1. Navigate to the bot location:
 ```bash
-cd .../BeBot/
+cd ../BeBot/
 ```
 
 2. Create a `.env` file so the app can load in required tokens and secrets    
@@ -62,27 +69,8 @@ npm run dev
 npm run start
 ```
 
-### 2. Start BeBot - Dockerised
 
-1. Install Docker
 
-2. Build the Docker image
-```bash
-docker build -t zooty/bebot .
-```
-
-3. Spin up a container using the image
-```bash
-docker run -d -p 3000:3000 zooty/bebot
-```
-You can stop the running container by checking the container ID, then stopping it.
-```bash
-docker ps
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-ec7cc365f7e9        zooty/bebot         "docker-entrypoint.s…"   29 minutes ago      Up 29 minutes       0.0.0.0:3000->3000/tcp   affectionate_maxwell
-
-docker kill ec7cc
-```
 
 
 
