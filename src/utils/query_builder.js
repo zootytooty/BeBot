@@ -28,10 +28,10 @@ const getDate = (message) => {
   }
 
   if (datetime[0].from) {
-    return moment(datetime[0].from.value).format('YYYY-MM-DD');
+    return moment.utc(datetime[0].from.value).local().format('YYYY-MM-DD');
   }
 
-  return moment(datetime[0].value).format('YYYY-MM-DD');
+  return moment.utc(datetime[0].value).local().format('YYYY-MM-DD');
 };
 
 const queryBuilder = (message) => {
