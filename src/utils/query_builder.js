@@ -38,7 +38,9 @@ const queryBuilder = (message) => {
   const venue = getVenue(message);
   const performanceDate = getDate(message);
 
-  return { venue, performance_date: performanceDate };
+  const query = { venue, performance_date: performanceDate };
+  console.log(query);
+  return query;
 };
 
 module.exports = queryBuilder;
