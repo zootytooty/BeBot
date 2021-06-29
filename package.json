@@ -18,6 +18,7 @@
     "botkit-plugin-cms": "^1.0.3",
     "dotenv": "^8.2.0",
     "moment": "^2.24.0",
+    "moment-timezone": "^0.5.33",
     "node-wit": "^6.0.0",
     "node-wt": "^1.0.0"
   },

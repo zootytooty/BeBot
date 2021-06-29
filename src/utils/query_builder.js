@@ -1,7 +1,9 @@
 // Extracts entities from a wit enriched message and parses them into an object
 // to be used as query strings when listing gigs
 
-const moment = require('moment');
+const moment = require('moment-timezone');
+
+const timezone = 'Australia/Melbourne';
 
 const getVenue = (message) => {
   const { traits } = message;
@@ -28,10 +30,10 @@ const getDate = (message) => {
   }
 
   if (datetime[0].from) {
-    return moment.utc(datetime[0].from.value).local().format('YYYY-MM-DD');
+    return moment.tz(datetime[0].from.value, timezone).format('YYYY-MM-DD');
   }
 
-  return moment.utc(datetime[0].value).local().format('YYYY-MM-DD');
+  return moment.tz(datetime[0].value, timezone).format('YYYY-MM-DD');
 };
 
 const queryBuilder = (message) => {
