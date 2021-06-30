@@ -3,6 +3,14 @@ const axios = require('axios');
 const GIGS_API =
   'https://v3dl6mmgz1.execute-api.ap-southeast-2.amazonaws.com/dev/gigs';
 
+function gigToTemplateElement(data) {
+  return {
+    title: data.title,
+    image_url: data.image_url,
+    subtitle: data.venue,
+  };
+}
+
 const getGigs = async (query = {}) => {
   try {
     const response = await axios.get(GIGS_API, { params: query });
@@ -12,26 +20,18 @@ const getGigs = async (query = {}) => {
     }
 
     // Convert the gig info into "generic templates" for FB
-    var attachment = {
-      'type':'template',
-      'payload':{
-          'template_type':'generic',
-          'elements': response.data.map(gigToTemplateElement)
-      }
+    const attachment = {
+      type: 'template',
+      payload: {
+        template_type: 'generic',
+        elements: response.data.map(gigToTemplateElement),
+      },
     };
 
     return attachment;
   } catch (e) {
     console.log(e);
     return 'Uh oh, an error occurred retrieving gig data.';
-  }
-};
-
-function gigToTemplateElement(data) {
-  return {
-    title: data.title,
-    image_url: data.image_url,
-    subtitle: data.venue
   }
 };
 
