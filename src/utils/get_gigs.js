@@ -8,6 +8,13 @@ function gigToTemplateElement(data) {
     title: data.title,
     image_url: data.image_url,
     subtitle: data.venue,
+    buttons: [
+      {
+        type: 'web_url',
+        url: data.url,
+        title: 'View Show',
+      },
+    ],
   };
 }
 
@@ -26,13 +33,6 @@ const getGigs = async (query = {}) => {
         template_type: 'generic',
         elements: response.data.map(gigToTemplateElement),
       },
-      buttons: [
-        {
-          type: 'web_url',
-          url: response.data.url,
-          title: 'View Show',
-        },
-      ],
     };
 
     return attachment;
