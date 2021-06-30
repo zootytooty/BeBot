@@ -11,16 +11,27 @@ const getGigs = async (query = {}) => {
       return "Aw man, there's nothing on!";
     }
 
-    // summarise each gig in the response
-    const gigs = response.data.map(
-      ({ venue, title, price }) =>
-        `${venue}: ${title}, ${!price ? 'Free' : `$${price}`}`
-    );
+    // Convert the gig info into "generic templates" for FB
+    var attachment = {
+      'type':'template',
+      'payload':{
+          'template_type':'generic',
+          'elements': response.data.map(gigToTemplateElement)
+      }
+    };
 
-    return gigs.join('\r\n');
+    return attachment;
   } catch (e) {
     console.log(e);
     return 'Uh oh, an error occurred retrieving gig data.';
+  }
+};
+
+function gigToTemplateElement(data) {
+  return {
+    title: data.title,
+    image_url: data.image_url,
+    subtitle: data.venue
   }
 };
 
