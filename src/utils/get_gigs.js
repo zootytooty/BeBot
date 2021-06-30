@@ -26,6 +26,13 @@ const getGigs = async (query = {}) => {
         template_type: 'generic',
         elements: response.data.map(gigToTemplateElement),
       },
+      buttons: [
+        {
+          type: 'web_url',
+          url: response.data.url,
+          title: 'View Show',
+        },
+      ],
     };
 
     return attachment;
