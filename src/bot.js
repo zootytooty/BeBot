@@ -19,6 +19,7 @@
 // Import Botkit's core features
 const { Botkit } = require('botkit');
 const { BotkitCMSHelper } = require('botkit-plugin-cms');
+const { MongoDbStorage } = require('botbuilder-storage-mongodb');
 
 // Import a platform-specific adapter for facebook.
 
@@ -26,8 +27,6 @@ const {
   FacebookAdapter,
   FacebookEventTypeMiddleware,
 } = require('botbuilder-adapter-facebook');
-
-// const { MongoDbStorage } = require('botbuilder-storage-mongodb');
 
 // Load process.env values from .env file
 require('dotenv').config();
@@ -37,12 +36,9 @@ const wit = require('./middleware/wit-ai')({
   accessToken: process.env.WIT_TOKEN,
 });
 
-const storage = null;
-// if (process.env.MONGO_URI) {
-//   storage = new MongoDbStorage({
-//     url: process.env.MONGO_URI,
-//   });
-// }
+const storage = new MongoDbStorage({
+  url: process.env.MONGO_URI,
+});
 
 const adapter = new FacebookAdapter({
   verify_token: process.env.FACEBOOK_VERIFY_TOKEN,
