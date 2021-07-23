@@ -20,6 +20,7 @@
 const { Botkit } = require('botkit');
 const { BotkitCMSHelper } = require('botkit-plugin-cms');
 const { MongoDbStorage } = require('botbuilder-storage-mongodb');
+const { MongoClient } = require('mongodb');
 
 // Import a platform-specific adapter for facebook.
 
@@ -36,9 +37,21 @@ const wit = require('./middleware/wit-ai')({
   accessToken: process.env.WIT_TOKEN,
 });
 
-const storage = new MongoDbStorage({
-  url: process.env.MONGO_URI,
+// code for upgraded mongodb storage package
+let storage = null;
+// GET MONGO Storage
+
+// Create a MongoClient and connect it.
+const mongoClient = new MongoClient(process.env.MONGO_URI, {
+  useUnifiedTopology: true,
 });
+await mongoClient.connect();
+
+// Grab a collection handle off the connected client
+const collection = mongoClient.getCollection(mongoClient);
+
+// Create a MongoDbStorage, supplying the collection to it.
+storage = new MongoDbStorage(collection);
 
 const adapter = new FacebookAdapter({
   verify_token: process.env.FACEBOOK_VERIFY_TOKEN,
