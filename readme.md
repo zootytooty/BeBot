@@ -4,10 +4,10 @@ The main zoot chatbot. This is very much in its infancy & currently most resembl
 
 Currently the supported functionality & keywords are supported:
 
-| Action        | Keywords      | Examples  |
-| :------------- |:-------------| :---------|
-| What's On      | happening <br> playing <br> what <br> gig | What's happening? <br> Who's playing? <br> What's on? <br> Show me todays gigs |
-| | | |
+| Action        | Examples  |
+| :------------- | :---------|
+| What's On      | What's happening? <br> Who's playing at jazzlab? <br> What's on tomorrow? <br> Show me todays gigs |
+| Help | Help! <br> help me <br> What can you do? |
 | | | |
 
 ## Running BeBot

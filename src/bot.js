@@ -37,7 +37,8 @@ const wit = require('./middleware/wit-ai')({
   accessToken: process.env.WIT_TOKEN,
 });
 
-//
+// Pattern borrowed from:
+// https://github.com/danimaniarqsoft/socrates/blob/master/src/bot.js
 async function initBotStorage() {
   const mongoClient = new MongoClient(process.env.MONGO_URI, {
     useUnifiedTopology: true,
