@@ -34,6 +34,7 @@ module.exports = ({ accessToken, logLevel = DEFAULT_LOG_LEVEL } = {}) => {
 
         console.log(`Wit.ai response: ${JSON.stringify(witData)}`);
 
+        message.intents = witData.intents;
         message.entities = witData.entities;
         message.traits = witData.traits;
         next();
