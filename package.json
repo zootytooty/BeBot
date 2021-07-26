@@ -19,6 +19,7 @@
     "dotenv": "^8.2.0",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.33",
+    "mongodb": "^4.0.1",
     "node-wit": "^6.0.0",
     "node-wt": "^1.0.0"
   },
