@@ -8,6 +8,7 @@ Currently the supported functionality & keywords are supported:
 | :------------- | :---------|
 | What's On      | What's happening? <br> Who's playing at jazzlab? <br> What's on tomorrow? <br> Show me todays gigs |
 | Help | Help! <br> help me <br> What can you do? |
+| Hello | Hey! <br> Hello <br> sup |
 | | | |
 
 ## Running BeBot
