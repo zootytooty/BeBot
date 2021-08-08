@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb');
 
-async function logConversation(conversation) {
+const logConversation = async (conversation) => {
   const client = new MongoClient(process.env.MONGO_URI, {
     useUnifiedTopology: true,
   });
@@ -12,12 +12,13 @@ async function logConversation(conversation) {
 
     const result = await logs.insertOne(conversation);
 
-    console.log(result);
+    return result;
   } catch (ex) {
     console.log(ex);
+    return ex;
   } finally {
     await client.close();
   }
-}
+};
 
 module.exports = logConversation;
