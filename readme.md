@@ -8,6 +8,8 @@ Currently the supported functionality & keywords are supported:
 | :------------- | :---------|
 | What's On      | What's happening? <br> Who's playing at jazzlab? <br> What's on tomorrow? <br> Show me todays gigs |
 | Help | Help! <br> help me <br> What can you do? |
+| Hello | Hey! <br> Hello <br> sup |
+| Venues | What're the cool venues? <br> What're the hip joints around town? <br> What venues are there? |
 | | | |
 
 ## Running BeBot
