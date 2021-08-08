@@ -1,4 +1,5 @@
 const getVenues = require('../utils/get_venues');
+const logConversation = require('../utils/logger');
 
 module.exports = async (controller) => {
   controller.on(
@@ -8,14 +9,20 @@ module.exports = async (controller) => {
         if (message.intents[0].name === 'venues') {
           const response = await getVenues();
 
-          console.log(response);
-
           if (typeof response === 'object') {
             await bot.reply(message, {
               attachment: response,
             });
+
+            message.response = response;
+            const log = await logConversation(message);
+            console.log(log);
           } else {
             await bot.reply(message, response);
+
+            message.response = response;
+            const log = await logConversation(message);
+            console.log(log);
           }
         }
       } catch (e) {

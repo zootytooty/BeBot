@@ -32,11 +32,10 @@ module.exports = ({ accessToken, logLevel = DEFAULT_LOG_LEVEL } = {}) => {
       try {
         const witData = await client.message(message.text);
 
-        console.log(`Wit.ai response: ${JSON.stringify(witData)}`);
-
         message.intents = witData.intents;
         message.entities = witData.entities;
         message.traits = witData.traits;
+        message.wit = witData;
         next();
       } catch (e) {
         console.log(e);
