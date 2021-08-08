@@ -11,7 +11,7 @@ module.exports = async (controller) => {
 
           message.response = response;
 
-          logConversation(message);
+          await logConversation(message);
           // console.log(`Full Log: ${JSON.stringify(message)}`);
 
           await bot.reply(message, response);
