@@ -4,29 +4,29 @@ const { MongoClient } = require('mongodb');
 // This doesn't work as expected & breaks the bot
 // It's deleting important info from the reference object
 // This should be a trival fix for anyone a little less spaz than me
-// function clean_message(message) {
-//   const conversation = message;
-//   // Clean up the Wit attributes
-//   if (Object.prototype.hasOwnProperty.call(conversation, 'entities')) {
-//     delete conversation.entities;
-//   }
-//   if (Object.prototype.hasOwnProperty.call(conversation, 'traits')) {
-//     delete conversation.traits;
-//   }
-//   if (Object.prototype.hasOwnProperty.call(conversation, 'intents')) {
-//     delete conversation.intents;
-//   }
+function cleanMessage(message) {
+  const conversation = { ...message };
+  // Clean up the Wit attributes
+  if (Object.prototype.hasOwnProperty.call(conversation, 'entities')) {
+    delete conversation.entities;
+  }
+  if (Object.prototype.hasOwnProperty.call(conversation, 'traits')) {
+    delete conversation.traits;
+  }
+  if (Object.prototype.hasOwnProperty.call(conversation, 'intents')) {
+    delete conversation.intents;
+  }
 
-//   // Facebook sends everything including keys. We don't want to store them
-//   delete conversation.context._adapter.options.access_token;
-//   delete conversation.context._adapter.options.verify_token;
-//   delete conversation.context._adapter.options.app_secret;
+  // Facebook sends everything including keys. We don't want to store them
+  delete conversation.context._adapter.options.access_token;
+  delete conversation.context._adapter.options.verify_token;
+  delete conversation.context._adapter.options.app_secret;
 
-//   return conversation;
-// }
+  return conversation;
+}
 
 const logConversation = async (message) => {
-  // const cleaned_message = clean_message(message);
+  const cleanedMessage = cleanMessage(message);
   const client = new MongoClient(process.env.MONGO_URI, {
     useUnifiedTopology: true,
   });
@@ -41,7 +41,7 @@ const logConversation = async (message) => {
       name: 'Company Inc',
       address: 'Highway 37',
     });
-    console.log(message);
+    console.log(JSON.stringify(cleanedMessage));
     return result;
   } catch (ex) {
     console.log(ex);
