@@ -11,10 +11,10 @@ module.exports = async (controller) => {
 
           message.response = response;
 
-          await logConversation(message);
           // console.log(`Full Log: ${JSON.stringify(message)}`);
 
           await bot.reply(message, response);
+          logConversation(message);
         }
       } catch (e) {
         console.log(e);
