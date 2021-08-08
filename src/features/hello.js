@@ -7,6 +7,10 @@ module.exports = async (controller) => {
           const response =
             "Yo! Ask me what's on & then go check out some killer music.";
 
+          message.response = response;
+
+          console.log(`Full Log: ${JSON.stringify(message)}`);
+
           await bot.reply(message, response);
         }
       } catch (e) {

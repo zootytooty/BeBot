@@ -8,8 +8,6 @@ module.exports = async (controller) => {
         if (message.intents[0].name === 'venues') {
           const response = await getVenues();
 
-          console.log(response);
-
           if (typeof response === 'object') {
             await bot.reply(message, {
               attachment: response,
