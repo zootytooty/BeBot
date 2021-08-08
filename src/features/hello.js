@@ -1,4 +1,5 @@
-const logConversation = require('../utils/logger');
+const { MongoClient } = require('mongodb');
+// const logConversation = require('../utils/logger');
 
 module.exports = async (controller) => {
   controller.on(
@@ -11,8 +12,20 @@ module.exports = async (controller) => {
 
           message.response = response;
 
-          logConversation(message);
+          // logConversation(message);
           // console.log(`Full Log: ${JSON.stringify(message)}`);
+          const client = new MongoClient(process.env.MONGO_URI, {
+            useUnifiedTopology: true,
+          });
+
+          await client.connect();
+
+          const db = client.db('zootdb');
+          const logs = db.collection('logs');
+
+          const result = await logs.insertOne(message);
+
+          console.log(result);
 
           await bot.reply(message, response);
         }
