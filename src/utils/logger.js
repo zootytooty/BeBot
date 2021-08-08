@@ -1,24 +1,29 @@
 /* eslint-disable no-underscore-dangle */
 const { MongoClient } = require('mongodb');
 
+// function clean_message(message) {
+//   const conversation = message;
+//   // Clean up the Wit attributes
+//   if (Object.prototype.hasOwnProperty.call(conversation, 'entities')) {
+//     delete conversation.entities;
+//   }
+//   if (Object.prototype.hasOwnProperty.call(conversation, 'traits')) {
+//     delete conversation.traits;
+//   }
+//   if (Object.prototype.hasOwnProperty.call(conversation, 'intents')) {
+//     delete conversation.intents;
+//   }
+
+//   // Facebook sends everything including keys. We don't want to store them
+//   delete conversation.context._adapter.options.access_token;
+//   delete conversation.context._adapter.options.verify_token;
+//   delete conversation.context._adapter.options.app_secret;
+
+//   return conversation;
+// }
+
 const logConversation = async (message) => {
-  const conversation = message;
-  // Clean up the Wit attributes
-  if (Object.prototype.hasOwnProperty.call(conversation, 'entities')) {
-    delete conversation.entities;
-  }
-  if (Object.prototype.hasOwnProperty.call(conversation, 'traits')) {
-    delete conversation.traits;
-  }
-  if (Object.prototype.hasOwnProperty.call(conversation, 'intents')) {
-    delete conversation.intents;
-  }
-
-  // Facebook sends everything including keys. We don't want to store them
-  delete conversation.context._adapter.options.access_token;
-  delete conversation.context._adapter.options.verify_token;
-  delete conversation.context._adapter.options.app_secret;
-
+  // const cleaned_message = clean_message(message);
   const client = new MongoClient(process.env.MONGO_URI, {
     useUnifiedTopology: true,
   });
@@ -26,6 +31,7 @@ const logConversation = async (message) => {
   try {
     await client.connect();
 
+    console.log(message);
     return client;
     //   const db = client.db('zootdb');
     //   const logs = db.collection('logs');
@@ -39,7 +45,6 @@ const logConversation = async (message) => {
   } finally {
     await client.close();
   }
-  //   console.log(client, conversation);
 };
 
 module.exports = logConversation;
