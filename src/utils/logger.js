@@ -1,11 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 const { MongoClient } = require('mongodb');
 
-// This doesn't work as expected & breaks the bot
-// It's deleting important info from the reference object
-// This should be a trival fix for anyone a little less spaz than me
 function cleanMessage(message) {
-  //   const conversation = { ...message };
   const conversation = JSON.parse(JSON.stringify(message));
   // Clean up the Wit attributes
   if (Object.prototype.hasOwnProperty.call(conversation, 'entities')) {
@@ -39,11 +35,6 @@ const logConversation = async (message) => {
     const logs = db.collection('logs');
 
     const result = await logs.insertOne(cleanedMessage);
-    // const result = await logs.insertOne({
-    //   name: 'Company Inc',
-    //   address: 'Highway 37',
-    // });
-    console.log(JSON.stringify(cleanedMessage));
     return result;
   } catch (ex) {
     console.log(ex);

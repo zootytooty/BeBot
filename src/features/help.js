@@ -1,3 +1,5 @@
+const logConversation = require('../utils/logger');
+
 module.exports = async (controller) => {
   controller.on(
     'message,direct_message,facebook_postback',
@@ -9,6 +11,10 @@ module.exports = async (controller) => {
         https://github.com/zootytooty/BeBot`;
 
           await bot.reply(message, response);
+
+          message.response = response;
+          const log = await logConversation(message);
+          console.log(log);
         }
       } catch (e) {
         console.log(e);
