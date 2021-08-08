@@ -9,11 +9,10 @@ module.exports = async (controller) => {
           const response =
             "Yo! Ask me what's on & then go check out some killer music.";
 
-          message.response = response;
-
           await bot.reply(message, response);
 
           // console.log(`Full Log: ${JSON.stringify(message)}`);
+          message.response = response;
           const log = await logConversation(message);
           console.log(log);
         }

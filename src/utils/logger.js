@@ -1,7 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 const { MongoClient } = require('mongodb');
 
-const logConversation = async (conversation) => {
+const logConversation = async (message) => {
+  const conversation = message;
   // Clean up the Wit attributes
   if (Object.prototype.hasOwnProperty.call(conversation, 'entities')) {
     delete conversation.entities;
