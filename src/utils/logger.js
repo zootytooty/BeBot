@@ -1,6 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 const { MongoClient } = require('mongodb');
 
+// This doesn't work as expected & breaks the bot
+// It's deleting important info from the reference object
+// This should be a trival fix for anyone a little less spaz than me
 // function clean_message(message) {
 //   const conversation = message;
 //   // Clean up the Wit attributes
@@ -31,9 +34,9 @@ const logConversation = async (message) => {
   try {
     await client.connect();
 
+    const db = client.db('zootdb');
     console.log(message);
-    return client;
-    //   const db = client.db('zootdb');
+    return db;
     //   const logs = db.collection('logs');
 
     // //   const result = await logs.insertOne(conversation);
