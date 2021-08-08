@@ -1,24 +1,25 @@
-const { MongoClient } = require('mongodb');
+// const { MongoClient } = require('mongodb');
 
 const logConversation = async (conversation) => {
-  const client = new MongoClient(process.env.MONGO_URI, {
-    useUnifiedTopology: true,
-  });
-  try {
-    await client.connect();
+  //   const client = new MongoClient(process.env.MONGO_URI, {
+  //     useUnifiedTopology: true,
+  //   });
+  //   try {
+  //     await client.connect();
 
-    const db = client.db('zootdb');
-    const logs = db.collection('logs');
+  //     const db = client.db('zootdb');
+  //     const logs = db.collection('logs');
 
-    const result = await logs.insertOne(conversation);
+  //     const result = await logs.insertOne(conversation);
 
-    return result;
-  } catch (ex) {
-    console.log(ex);
-    return ex;
-  } finally {
-    await client.close();
-  }
+  //     return result;
+  //   } catch (ex) {
+  //     console.log(ex);
+  //     return ex;
+  //   } finally {
+  //     await client.close();
+  //   }
+  console.log(conversation);
 };
 
 module.exports = logConversation;
