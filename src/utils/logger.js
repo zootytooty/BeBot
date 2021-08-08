@@ -5,7 +5,8 @@ const { MongoClient } = require('mongodb');
 // It's deleting important info from the reference object
 // This should be a trival fix for anyone a little less spaz than me
 function cleanMessage(message) {
-  const conversation = { ...message };
+  //   const conversation = { ...message };
+  const conversation = JSON.parse(JSON.stringify(message));
   // Clean up the Wit attributes
   if (Object.prototype.hasOwnProperty.call(conversation, 'entities')) {
     delete conversation.entities;
