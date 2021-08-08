@@ -1,3 +1,5 @@
+const logConversation = require('../utils/logger');
+
 module.exports = async (controller) => {
   controller.on(
     'message,direct_message,facebook_postback',
@@ -9,7 +11,8 @@ module.exports = async (controller) => {
 
           message.response = response;
 
-          console.log(`Full Log: ${JSON.stringify(message)}`);
+          logConversation(message);
+          // console.log(`Full Log: ${JSON.stringify(message)}`);
 
           await bot.reply(message, response);
         }
