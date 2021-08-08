@@ -37,7 +37,11 @@ const logConversation = async (message) => {
     const db = client.db('zootdb');
     const logs = db.collection('logs');
 
-    const result = await logs.insertOne(message);
+    const result = await logs.insertOne({
+      name: 'Company Inc',
+      address: 'Highway 37',
+    });
+    console.log(message);
     return result;
   } catch (ex) {
     console.log(ex);
