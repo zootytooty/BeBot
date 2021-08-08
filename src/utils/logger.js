@@ -36,12 +36,9 @@ const logConversation = async (message) => {
 
     const db = client.db('zootdb');
     const logs = db.collection('logs');
-    console.log(message);
-    return logs;
 
-    // //   const result = await logs.insertOne(conversation);
-
-    //   return result;
+    const result = await logs.insertOne(message);
+    return result;
   } catch (ex) {
     console.log(ex);
     return ex;
