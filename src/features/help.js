@@ -8,7 +8,7 @@ module.exports = async (controller) => {
         if (message.intents[0].name === 'help') {
           const response = `Be bop zoot, here to help :) If you've found a bug, would like to request a feature or want to see what I can do, please headover to my homepage:
         
-        https://github.com/zootytooty/BeBot`;
+        https://zootytooty.github.io/zoothome/`;
 
           await bot.reply(message, response);
 
