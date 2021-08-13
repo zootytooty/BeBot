@@ -8,8 +8,7 @@ function titleCase(str) {
   const wordArr = strLowerCase
     .split(' ')
     .map(
-      (currentValue) =>
-        currentValue[0].toUpperCase() + currentValue.substring(1)
+      currentValue => currentValue[0].toUpperCase() + currentValue.substring(1)
     );
 
   return wordArr.join(' ');
@@ -46,15 +45,17 @@ const getGigs = async (query = {}) => {
     }
 
     // Convert the gig info into "generic templates" for FB
-    const attachment = {
-      type: 'template',
-      payload: {
-        template_type: 'generic',
-        elements: response.data.map(gigToTemplateElement),
+    const message = {
+      attachment: {
+        type: 'template',
+        payload: {
+          template_type: 'generic',
+          elements: response.data.map(gigToTemplateElement),
+        },
       },
     };
 
-    return attachment;
+    return message;
   } catch (e) {
     console.log(e);
     return 'Uh oh, an error occurred retrieving gig data.';
