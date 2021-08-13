@@ -17,6 +17,7 @@
     "botkit": "^4.6.2",
     "botkit-plugin-cms": "^1.0.3",
     "dotenv": "^8.2.0",
+    "lodash": "^4.17.21",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.33",
     "mongodb": "^4.0.1",
