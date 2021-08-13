@@ -1,6 +1,6 @@
-const logConversation = require('../utils/logger');
+// const logConversation = require('../utils/logger');
 
-module.exports = async (controller) => {
+module.exports = async controller => {
   controller.on(
     'message,direct_message,facebook_postback',
     async (bot, message) => {
@@ -12,8 +12,8 @@ module.exports = async (controller) => {
           await bot.reply(message, response);
 
           message.response = response;
-          const log = await logConversation(message);
-          console.log(log);
+          // const log = await logConversation(message);
+          // console.log(log);
         }
       } catch (e) {
         console.log(e);
