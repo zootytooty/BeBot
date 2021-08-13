@@ -12,7 +12,8 @@ const titleCase = str =>
     .join(' ');
 
 const createSubtitle = gig => {
-  const line1 = `${titleCase(gig.venue)}, $${gig.price}`;
+  const price = gig.price !== 0 ? `$${gig.price}` : 'Free';
+  const line1 = `${titleCase(gig.venue)}, ${price}`;
   const line2 = `Doors: ${gig.doors_open}, Start: ${gig.music_starts}`;
 
   return `${line1}\n${line2}`;
