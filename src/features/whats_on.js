@@ -10,7 +10,7 @@ module.exports = async controller => {
         if (message.intents[0].name === 'whats_on') {
           const responses = await getGigs(queryBuilder(message));
 
-          responses.forEach(async response => bot.reply(message, response));
+          await Promise.all([...responses.map(r => bot.reply(message, r))]);
 
           message.response = responses;
           const log = await logConversation(message);

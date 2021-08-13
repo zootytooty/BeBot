@@ -42,7 +42,7 @@ const getGigs = async (query = {}) => {
     const { data } = await axios.get(GIGS_API, { params: query });
 
     if (!data || data.length === 0) {
-      return "Aw man, there's nothing on!";
+      return ["Aw man, there's nothing on!"];
     }
 
     // Facebook's generic message template accepts a max of 10 elements
@@ -66,7 +66,7 @@ const getGigs = async (query = {}) => {
     return messages;
   } catch (e) {
     console.log(e);
-    return 'Uh oh, an error occurred retrieving gig data.';
+    return ['Uh oh, an error occurred retrieving gig data.'];
   }
 };
 
