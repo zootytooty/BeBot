@@ -1,6 +1,6 @@
 const queryBuilder = require('../utils/query_builder');
 const getGigs = require('../utils/get_gigs');
-// const logConversation = require('../utils/logger');
+const logConversation = require('../utils/logger');
 
 module.exports = async controller => {
   controller.on(
@@ -13,8 +13,8 @@ module.exports = async controller => {
           await Promise.all([...responses.map(r => bot.reply(message, r))]);
 
           message.response = responses;
-          // const log = await logConversation(message);
-          // console.log(log);
+          const log = await logConversation(message);
+          console.log(log);
         }
       } catch (e) {
         console.log(e);
