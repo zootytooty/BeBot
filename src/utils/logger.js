@@ -3,13 +3,15 @@ const { MongoClient } = require('mongodb');
 
 function cleanMessage(message) {
   // strip out wit data - it's on a wit sub document
-  const { entities, traits, intents, context, ...safeMessage } = message;
+  const { entities, traits, intents, ...safeMessage } = message;
 
   // clean the botkit context object. Adapter just gives us info from
   // the botkit facebook adapter. Nothing much useful except our crendentials
-  const { _adapter, ...safeContext } = context;
+  // const { _adapter, ...safeContext } = context;
+  delete safeMessage.context._adapter.options.access_token;
+  delete safeMessage.context._adapter.options.verify_token;
+  delete safeMessage.context._adapter.options.app_secret;
 
-  safeMessage.context = safeContext;
   // return { ...safeMessage, context: safeContext };
   return safeMessage;
 }
