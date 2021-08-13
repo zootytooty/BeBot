@@ -1,4 +1,5 @@
 const axios = require('axios');
+const chunk = require('lodash/chunk');
 
 const GIGS_API =
   'https://v3dl6mmgz1.execute-api.ap-southeast-2.amazonaws.com/dev/gigs';
@@ -38,24 +39,31 @@ function gigToTemplateElement(data) {
 
 const getGigs = async (query = {}) => {
   try {
-    const response = await axios.get(GIGS_API, { params: query });
+    const { data } = await axios.get(GIGS_API, { params: query });
 
-    if (!response.data || response.data.length === 0) {
+    if (!data || data.length === 0) {
       return "Aw man, there's nothing on!";
     }
 
-    // Convert the gig info into "generic templates" for FB
-    const message = {
-      attachment: {
-        type: 'template',
-        payload: {
-          template_type: 'generic',
-          elements: response.data.map(gigToTemplateElement),
-        },
-      },
-    };
+    // Facebook's generic message template accepts a max of 10 elements
+    // split gigs into chunks of 10 and return an array of messages to send
+    const chunkyGigs = chunk(data, 10);
 
-    return message;
+    const messages = chunkyGigs.map(gigs => {
+      const elements = gigs.map(gigToTemplateElement);
+
+      return {
+        attachment: {
+          type: 'template',
+          payload: {
+            template_type: 'generic',
+            elements,
+          },
+        },
+      };
+    });
+
+    return messages;
   } catch (e) {
     console.log(e);
     return 'Uh oh, an error occurred retrieving gig data.';

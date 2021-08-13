@@ -8,11 +8,11 @@ module.exports = async controller => {
     async (bot, message) => {
       try {
         if (message.intents[0].name === 'whats_on') {
-          const response = await getGigs(queryBuilder(message));
+          const responses = await getGigs(queryBuilder(message));
 
-          await bot.reply(message, response);
+          responses.forEach(async response => bot.reply(message, response));
 
-          message.response = response;
+          message.response = responses;
           const log = await logConversation(message);
           console.log(log);
         }
