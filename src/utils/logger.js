@@ -7,8 +7,9 @@ function cleanMessage(message) {
 
   // clean the botkit context object. Adapter just gives us info from
   // the botkit facebook adapter. Nothing much useful except our crendentials
-  // const { _adapter, ...safeContext } = context;
+  const { _adapter, ...safeContext } = context;
 
+  safeMessage.context = safeContext;
   // return { ...safeMessage, context: safeContext };
   return safeMessage;
 }
