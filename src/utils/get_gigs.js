@@ -19,7 +19,7 @@ const createSubtitle = gig => {
 };
 
 const gigToElement = gig => ({
-  title: gig.title,
+  title: gig.title !== null && gig.title !== '' ? gig.title : 'Unknown Title',
   image_url: gig.image_url,
   subtitle: createSubtitle(gig),
   buttons: [
