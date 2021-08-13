@@ -2,24 +2,15 @@
 const { MongoClient } = require('mongodb');
 
 function cleanMessage(message) {
-  const conversation = JSON.parse(JSON.stringify(message));
-  // Clean up the Wit attributes
-  if (Object.prototype.hasOwnProperty.call(conversation, 'entities')) {
-    delete conversation.entities;
-  }
-  if (Object.prototype.hasOwnProperty.call(conversation, 'traits')) {
-    delete conversation.traits;
-  }
-  if (Object.prototype.hasOwnProperty.call(conversation, 'intents')) {
-    delete conversation.intents;
-  }
+  // strip out wit data - it's on a wit sub document
+  const { entities, traits, intents, context, ...safeMessage } = message;
 
-  // Facebook sends everything including keys. We don't want to store them
-  delete conversation.context._adapter.options.access_token;
-  delete conversation.context._adapter.options.verify_token;
-  delete conversation.context._adapter.options.app_secret;
+  // clean the botkit context object. Adapter just gives us info from
+  // the botkit facebook adapter. Nothing much useful except our crendentials
+  // const { _adapter, ...safeContext } = context;
 
-  return conversation;
+  // return { ...safeMessage, context: safeContext };
+  return safeMessage;
 }
 
 const logConversation = async message => {
