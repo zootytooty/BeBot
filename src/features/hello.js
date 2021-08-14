@@ -1,6 +1,6 @@
 const logConversation = require('../utils/logger');
 
-module.exports = async (controller) => {
+module.exports = async controller => {
   controller.on(
     'message,direct_message,facebook_postback',
     async (bot, message) => {
