@@ -1,17 +1,16 @@
 /* eslint-disable no-underscore-dangle */
 const { MongoClient } = require('mongodb');
 
-function cleanMessage(message) {
+const cleanMessage = message => {
   // strip out wit data - it's on a wit sub document
-  const { entities, traits, intents, ...safeMessage } = message;
+  const { entities, traits, intents, context, ...safeMessage } = message;
 
   // clean the botkit context object. Adapter just gives us info from
   // the botkit facebook adapter. Nothing much useful except our crendentials
-  // const { _adapter, ...safeContext } = context;
+  const { _adapter, ...safeContext } = context;
 
-  // return { ...safeMessage, context: safeContext };
-  return safeMessage;
-}
+  return JSON.parse(JSON.stringify({ ...safeMessage, context: safeContext }));
+};
 
 const logConversation = async message => {
   const cleanedMessage = cleanMessage(message);
