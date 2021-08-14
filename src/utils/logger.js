@@ -9,7 +9,7 @@ const cleanMessage = message => {
   // the botkit facebook adapter. Nothing much useful except our crendentials
   const { _adapter, ...safeContext } = context;
 
-  return { ...safeMessage, context: safeContext };
+  return JSON.parse(JSON.stringify({ ...safeMessage, context: safeContext }));
 };
 
 const logConversation = async message => {
