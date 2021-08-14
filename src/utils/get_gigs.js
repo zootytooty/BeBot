@@ -12,7 +12,7 @@ const titleCase = str =>
     .join(' ');
 
 const createSubtitle = gig => {
-  const price = gig.price !== 0 ? `$${gig.price}` : 'Free';
+  const price = gig.price ? `$${gig.price}` : 'Free';
   const line1 = `${titleCase(gig.venue)}, ${price}`;
   const line2 = `Doors: ${gig.doors_open}, Start: ${gig.music_starts}`;
 
@@ -20,7 +20,7 @@ const createSubtitle = gig => {
 };
 
 const gigToElement = gig => ({
-  title: gig.title !== null && gig.title !== '' ? gig.title : 'Unknown Title',
+  title: gig.title || 'Unknown Title',
   image_url: gig.image_url,
   subtitle: createSubtitle(gig),
   buttons: [
